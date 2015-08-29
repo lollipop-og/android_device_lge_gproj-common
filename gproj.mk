@@ -33,7 +33,6 @@ PRODUCT_PACKAGES += \
         librs_jni
 
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/init.gee-common.rc:root/init.gee-common.rc \
         $(LOCAL_PATH)/init.gee.usb.rc:root/init.gee.usb.rc
 
 PRODUCT_COPY_FILES += \
@@ -81,7 +80,9 @@ PRODUCT_COPY_FILES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/gps.conf:system/etc/gps.conf
+	$(LOCAL_PATH)/gps.conf:system/etc/gps.conf \
+	$(LOCAL_PATH)/izat.conf:system/etc/izat.conf \
+	$(LOCAL_PATH)/sap.conf:system/etc/sap.conf
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -103,7 +104,9 @@ PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=196608
@@ -129,9 +132,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.call_ring.multiple=0
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.telephony.ril_class=LgeLteRIL \
-	ro.telephony.ril.v3=qcomdsds
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.telephony.ril_class=LgeLteRIL \
+#	ro.telephony.ril.v3=qcomdsds
 
 #Upto 3 layers can go through overlays
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
@@ -176,12 +179,16 @@ PRODUCT_PACKAGES += \
 	libstagefrighthw \
 	libc2dcolorconvert
 
-PRODUCT_PACKAGES += \
-	libloc_adapter \
-	libloc_eng \
-	libloc_api_v02 \
-	libgps.utils \
-	gps.msm8960
+#PRODUCT_PACKAGES += \
+#	libloc_adapter \
+#	libloc_eng \
+#	libloc_api_v02 \
+#	libloc_ds_api \
+#	libloc_core \
+#	libizat_core \
+#	libgeofence \
+#	libgps.utils \
+#	gps.default
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libril-qc-qmi-1.so
@@ -191,7 +198,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=15
+	wifi.supplicant_scan_interval=25
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
